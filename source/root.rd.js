@@ -1,8 +1,7 @@
-import React from 'react'
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 // Modules for combine reducers
-import oauth from '../modules/oauth/reducers/oauth.rd.js'
+import oauth from '../modules/oauth/reducers/oauth.rd.js';
 
 const root = combineReducers({
     oauth
@@ -11,11 +10,9 @@ const root = combineReducers({
 const initialState = root({}, {});
 
 export default (state, action) => {
-
-  if(action.type == 'LOG_OUT'){
-    localStorage.removeItem('authToken');
-    state = initialState;
-  }
-
-  return root(state, action);
-}
+    if (action.type === 'LOG_OUT') {
+        localStorage.removeItem('authToken');
+        state = initialState;
+    }
+    return root(state, action);
+};

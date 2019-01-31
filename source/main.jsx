@@ -1,29 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-import { withRouter, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import {CombineRoutes} from '../routes/common.route.jsx'
+import { CombineRoutes } from '../routes/common.route.jsx';
 
 function mapStateToProps(state) {
     return {
-    	...state
-    }
+        ...state
+    };
 }
 
 @withRouter
 @connect(mapStateToProps)
-export default class Main extends React.Component {
-
-	constructor(props){
-		super(props);
-	}
-
-	render() {
-		return (
-          <CombineRoutes />
-        )
-
-	}
-
+class Main extends React.Component {
+    render() {
+        return (
+            <CombineRoutes />
+        );
+    }
 }
+
+export default Main;

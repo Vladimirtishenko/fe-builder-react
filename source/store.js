@@ -1,9 +1,11 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from '../reducers/root.rd.js';
-import thunk from 'redux-thunk'
+
 
 const enhancer = compose(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
 );
 
 export default function configureStore(initialState = {}) {

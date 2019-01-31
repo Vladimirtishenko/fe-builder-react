@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-export const CombineRoutes = (props) => {
-    return null
-}
+export const CombineRoutes = () => {
+    return (<p>Hello. It is react sample. You have to add real router.</p>);
+};

@@ -28,6 +28,10 @@ module.exports = (function() {
                     fs.renameSync(__dirname + '/source/gitignore', __dirname + '/source/.gitignore')
                 }
 
+                if (fs.existsSync(__dirname + '/source/eslintrc')) {
+                    fs.renameSync(__dirname + '/source/eslintrc', __dirname + '/source/.eslintrc')
+                }
+
                 if (fs.existsSync(__dirname + '/source/babelrc')) {
                     fs.renameSync(__dirname + '/source/babelrc', __dirname + '/source/.babelrc')
                 }

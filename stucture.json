@@ -1,7 +1,7 @@
 {
 	"public": {
 		"js": {
-			"0": "app.js",
+			"0": "app.jsx",
 			"1": "index.js",
 			"modules": {
 				"oauth": {
@@ -50,5 +50,5 @@
 		},
 		"fonts": ""
 	},
-	"$": "webpack.config.js, .gitignore, .babelrc, server.js"
+	"$": "webpack.config.js, .gitignore, .babelrc, .eslintrc, server.js"
 }
