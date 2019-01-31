@@ -1,0 +1,54 @@
+{
+	"public": {
+		"js": {
+			"0": "app.js",
+			"1": "index.js",
+			"modules": {
+				"oauth": {
+					"components": "",
+					"actions": "",
+					"reducers": {
+						"0": "oauth.rd.js"
+					},
+					"routes": "",
+					"containers": "",
+					"constants": "",
+					"decorators": ""
+				}
+			},
+			"components": {
+				"form": "",
+				"includes": ""
+			},
+			"helpers": "",
+			"vocabularies": "",
+			"configuration": "",
+			"routes": "common.route.jsx",
+			"reducers": "root.rd.js",
+			"store": "store.js",
+			"wrappers": {
+				"0": "root.jsx",
+				"1": "main.jsx"
+			}
+		},
+		"styl": {
+			"blocks": "",
+			"vendor": {
+				"0": "bootstrap.styl",
+				"bem": ["https://github.com/Vladimirtishenko/shared", "bem"]
+			},
+			"0": "build.styl",
+			"common": {
+				"0": "defaults.styl",
+				"__modificators": ""
+			}
+		},
+		"templates": "index.html",
+		"build": "",
+		"img": {
+			"0": "test_pattern.svg"
+		},
+		"fonts": ""
+	},
+	"$": "webpack.config.js, .gitignore, .babelrc, server.js"
+}
