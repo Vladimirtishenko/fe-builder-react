@@ -34,7 +34,10 @@
 		"styl": {
 			"blocks": "",
 			"vendor": {
-				"0": "bootstrap.styl",
+				"bootstrap": {
+					"0" : "bootstrap.styl",
+					"1" : "variables.styl"
+				},
 				"bem": ["https://github.com/Vladimirtishenko/shared", "bem"]
 			},
 			"0": "build.styl",
