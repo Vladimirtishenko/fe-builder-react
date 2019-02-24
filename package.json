@@ -1,6 +1,6 @@
 {
     "name": "fe-builder-react",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Build React Infrastracture",
     "main": "index.js",
     "scripts": {
