@@ -3,6 +3,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import autentification from '../modules/oauth/decorators/autentification.dec.jsx';
+
 import { CombineRoutes } from '../routes/common.route.jsx';
 
 function mapStateToProps(state) {
@@ -13,6 +15,7 @@ function mapStateToProps(state) {
 
 @withRouter
 @connect(mapStateToProps)
+@autentification
 class Main extends React.Component {
     render() {
         return (

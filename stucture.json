@@ -5,27 +5,47 @@
 			"1": "index.js",
 			"modules": {
 				"oauth": {
-					"components": "",
-					"actions": "",
+					"components": {
+						"0": "login.jsx"
+					},
+					"actions": {
+						"0": "oauth.action.js"
+					},
 					"reducers": {
 						"0": "oauth.rd.js"
 					},
-					"routes": "",
-					"containers": "",
-					"constants": "",
-					"decorators": ""
+					"routes": {
+						"0": "oauth.router.jsx"
+					},
+					"containers": {
+						"0": "oauth.cv.jsx"
+					},
+					"constants": {
+						"0": "oauth.const.js"
+					},
+					"decorators": {
+						"0": "autentification.dec.jsx"
+					}
 				}
 			},
-			"components": {
-				"form": "",
-				"includes": ""
+			"libraries": {
+				"warnings": ["https://github.com/Vladimirtishenko/shared", "react-warnings"],
+				"validation": ["https://github.com/Vladimirtishenko/shared", "react-validation"]
 			},
-			"helpers": "",
+			"common": {
+				"components": {
+					"form": {
+						"0": "input.jsx"
+					},
+					"includes": ""
+				}
+			},
+			"helpers": ["https://github.com/Vladimirtishenko/shared", "helpers"],
 			"vocabularies": "",
 			"configuration": "",
+			"store": "store.js",
 			"routes": "common.route.jsx",
 			"reducers": "root.rd.js",
-			"store": "store.js",
 			"wrappers": {
 				"0": "root.jsx",
 				"1": "main.jsx"

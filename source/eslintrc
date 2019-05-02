@@ -29,6 +29,7 @@
     },
 
     "rules": {
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
         "no-param-reassign": "off",
         "jsx-quotes": 1,
         "operator-linebreak": [2, "after", { "overrides": { "?": "ignore", ":": "ignore" } }],
@@ -38,7 +39,7 @@
         "react/jsx-first-prop-new-line": [2, "multiline-multiprop"],
         "react/jsx-uses-vars": 1,
         "react/no-did-update-set-state": 0,
-        "arrow-body-style": [1, "as-needed", { "requireReturnForObjectLiteral": false }],
+        "arrow-body-style": 0,
         "react/react-in-jsx-scope": 1,
         "react/prefer-stateless-function": 0,
         "comma-dangle": [1, "never"],
@@ -60,12 +61,13 @@
         "jsx-a11y/label-has-associated-control": ["error", { assert: "either" } ],
         "jsx-a11y/click-events-have-key-events" : 0,
         "jsx-a11y/label-has-for": 0,
-        "max-len": [1, { "code": 150 }],
+        "max-len": [1, { "code": 250 }],
         "guard-for-in": 0,
         "no-restricted-syntax": [2, "WithStatement", "BinaryExpression[operator='in']"],
         "no-continue": 0,
         "no-return-assign": 0,
         "no-restricted-globals": 0,
+        "react/jsx-indent-props": [2, 'tab'],
         "react/jsx-no-bind": [2, {
             "ignoreDOMComponents": false,
             "ignoreRefs": false,
