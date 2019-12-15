@@ -43,7 +43,7 @@
 				}
 			},
 			"helpers": ["https://github.com/Vladimirtishenko/shared", "helpers"],
-			"vocabularies": "",
+			"i18n": "",
 			"configuration": "",
 			"store": "store.js",
 			"routes": "common.route.jsx",
