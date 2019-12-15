@@ -1,4 +1,15 @@
-* Move to new babel version
+# New version of React + Redux environment
+
+- Last logs
+    * Structure has been slightly changed;
+    * Redux-form was added;
+    * Create validation helper for Redux-form;
+    * New version of Babel has been installed;
+    * Error page (404) has been added;
+    * Old validator was removed;
+    * Logic of routes was changed from jsx to js;
+    * New function for extend bootstrap were added;
+    * All dependencies were updated
 
 # Installing
 For create Front End Infrastructure that consist of (Yarn, Stylus, React + Redux, Webpack + Babel, BEM):

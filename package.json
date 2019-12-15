@@ -1,6 +1,6 @@
 {
     "name": "fe-builder-react",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Build React Infrastracture! React Architecture best practices.",
     "main": "index.js",
     "scripts": {
