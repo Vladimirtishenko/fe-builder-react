@@ -1,7 +1,8 @@
 import React from 'react';
 import { object, oneOfType } from 'prop-types';
 
-import Login from '../routes/oauth.router.jsx';
+import { Route } from 'react-router-dom';
+import routes from '../routes/oauth.router.js';
 
 const AutentificationDecorator = (WrapedComponent) => {
 	class Autentification extends React.Component {
@@ -58,7 +59,12 @@ const AutentificationDecorator = (WrapedComponent) => {
 			}
 
 			return (
-				<Login />
+				routes && routes.length && routes.map((item) => {
+					const { path, component } = item;
+					return (
+						<Route key={path} exact path={path} component={component} />
+					);
+				})
 			);
 		}
 	}

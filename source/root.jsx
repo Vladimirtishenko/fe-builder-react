@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { browserHistory, BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import configureStore from '../store/store.js';
 
@@ -13,7 +13,7 @@ class Root extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <Router history={browserHistory}>
+                <Router>
                     <Main />
                 </Router>
             </Provider>

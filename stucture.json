@@ -15,7 +15,7 @@
 						"0": "oauth.rd.js"
 					},
 					"routes": {
-						"0": "oauth.router.jsx"
+						"0": "oauth.router.js"
 					},
 					"containers": {
 						"0": "oauth.cv.jsx"
@@ -29,13 +29,15 @@
 				}
 			},
 			"libraries": {
-				"warnings": ["https://github.com/Vladimirtishenko/shared", "react-warnings"],
-				"validation": ["https://github.com/Vladimirtishenko/shared", "react-validation"]
+				"warnings": ["https://github.com/Vladimirtishenko/shared", "react-warnings"]
 			},
 			"common": {
 				"components": {
 					"form": {
 						"0": "input.jsx"
+					},
+					"error": {
+						"0": "error.jsx"
 					},
 					"includes": ""
 				}
@@ -56,7 +58,8 @@
 			"vendor": {
 				"bootstrap": {
 					"0" : "bootstrap.styl",
-					"1" : "variables.styl"
+					"1" : "variables.styl",
+					"2" : "functions.styl"
 				},
 				"bem": ["https://github.com/Vladimirtishenko/shared", "bem"]
 			},

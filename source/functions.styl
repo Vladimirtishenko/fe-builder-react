@@ -1,0 +1,29 @@
+createNewPoint(name, minW, maxW = 0)
+    if maxW
+        @media(min-width minW) and (max-width maxW)
+            col(-name)
+            col-auto(name-)
+            for key in (1..12)
+                .col-{name}-{key}
+                    col-attr: round((key * 100 / 12)%,6)
+                .order-{name}-{key}
+                    -ms-flex-order key
+                    order key
+            for key in (0..11)
+                value = 8.3333333333333
+                .offset-{name}-{key}
+                    margin-left key * value + '%'
+    else
+        @media(min-width minW)
+            col(-name)
+            col-auto(name-)
+            for key in (1..12)
+                .col-{name}-{key}
+                    col-attr: round((key * 100 / 12)%,6)
+                .order-{name}-{key}
+                    -ms-flex-order key
+                    order key
+            for key in (0..11)
+                value = 8.3333333333333
+                .offset-{name}-{key}
+                    margin-left key * value + '%'

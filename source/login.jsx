@@ -1,36 +1,39 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { func } from 'prop-types';
 
-import { ValidatorForm } from '../../../libraries/validation/index.js';
 import Input from '../../../common/components/form/input.jsx';
 
+import { required, email } from '../../../helpers/validation.helper.js';
+
+@reduxForm({ form: 'signin', enableReinitialize: true })
 class LoginForm extends React.Component {
 	static propTypes = {
-		submit: func.isRequired
+		handleSubmit: func.isRequired
 	}
 
 	render() {
-		const { submit } = this.props;
+		const { handleSubmit } = this.props;
 
 		return (
-            <ValidatorForm onSubmit={submit}>
-				<Input
-					validators={['required', 'isEmail']}
-					errorMessages={['This field is required', 'Email pattern is not valid']}
+            <form onSubmit={handleSubmit}>
+				<Field
+					component={Input}
+					validate={[required, email]}
 					label="Email"
 					name="email"
 					autoComplete="no-password"
 				/>
-				<Input
-					validators={['required']}
-					errorMessages={['This field is required']}
+				<Field
+					component={Input}
+					validate={[required]}
 					label="Password"
 					name="password"
 					autoComplete="no-password"
 					type="password"
 				/>
                 <button type="submit">Sign in</button>
-            </ValidatorForm>
+            </form>
         );
 	}
 }

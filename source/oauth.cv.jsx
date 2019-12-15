@@ -12,10 +12,11 @@ import LoginForm from '../components/login.jsx';
 
 import EventHandling from '../../../libraries/warnings/index.jsx';
 
-import serialize from '../../../helpers/serialize.helper.js';
-
 const mapStateToProps = (state) => {
-	return { ...state.oauth };
+	return {
+		...state.oauth,
+		realTimeForm: state.form
+	};
 },
 
 mapDispatchToProps = (dispatch) => {
@@ -30,24 +31,35 @@ mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 class Login extends React.Component {
 	static propTypes = {
-		actions: oneOfType([object]).isRequired
+		actions: oneOfType([object]).isRequired,
+		realTimeForm: oneOfType([object])
 	}
 
-	handleSubmit(e) {
-		e.preventDefault();
+	static defaultProps = {
+		realTimeForm: {}
+	}
 
-		const form = e && e.target,
-			  creds = serialize(form),
-			  { actions: { login } } = this.props;
+	handleSubmit() {
+		const {
+			actions: { login },
+			realTimeForm: {
+				signin: {
+					values
+				}
+			}
+		} = this.props;
 
-		login(creds);
+		login(values);
 	}
 
 	render() {
 		return (
 			<React.Fragment>
 				<EventHandling />
-				<LoginForm submit={::this.handleSubmit} {...this.props} />
+				<LoginForm
+					onSubmit={::this.handleSubmit}
+					{...this.props}
+				/>
 			</React.Fragment>
 		);
 	}

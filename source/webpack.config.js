@@ -1,16 +1,13 @@
-"use strict";
-
-const webpack = require('webpack');
-const fs = require('fs');
-const path = require('path');
-const babelSettings = JSON.parse(fs.readFileSync(".babelrc"));
-const TerserPlugin = require('terser-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const environment = process.env.NODE_ENV || 'development';
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path'),
+ TerserPlugin = require('terser-webpack-plugin'),
+ HtmlWebpackPlugin = require('html-webpack-plugin'),
+ MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+ environment = process.env.NODE_ENV || 'development',
+ postCss = require('postcss-preset-env'),
+ cssNano = require('cssnano');
 
 const VENDOR_LIBS = [
-  'babel-polyfill',
+  '@babel/polyfill',
   'lodash',
   'react',
   'react-dom',
@@ -20,9 +17,9 @@ const VENDOR_LIBS = [
   'react-router-dom',
   'react-router-redux',
   'prop-types'
-];
+],
 
-const config = {
+ config = {
     name: 'js',
     entry: {
         vendor: VENDOR_LIBS,
@@ -32,7 +29,7 @@ const config = {
         path: path.join(__dirname, 'public', 'build'),
         filename: 'build.[name].[chunkhash].js',
         chunkFilename: 'build.[name].chunk.[chunkhash].js',
-        publicPath: environment != 'production' ? '/' : '/build/'
+        publicPath: environment !== 'production' ? '/' : '/build/'
     },
     module: {
         rules: [
@@ -69,9 +66,9 @@ const config = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: (loader) => [
-                              require('postcss-preset-env')(),
-                              require('cssnano')()
+                            plugins: () => [
+                              postCss(),
+                              cssNano()
                             ]
                         }
                     },
@@ -86,7 +83,7 @@ const config = {
     },
     optimization: {
       splitChunks: {
-        chunks: "async",
+        chunks: 'async',
         minSize: 1000,
         minChunks: 2,
         maxAsyncRequests: 5,
@@ -96,7 +93,7 @@ const config = {
           default: false,
           vendor: {
             name: 'vendor',
-            chunks: "all",
+            chunks: 'all',
             test: /[\\/]node_modules[\\/]/,
             priority: -10
           }
@@ -112,12 +109,12 @@ const config = {
     mode: environment,
     plugins: [
         new MiniCssExtractPlugin({
-          filename: "build.[name].[hash].css",
-          chunkFilename: "build.[id].[hash].css"
+          filename: 'build.[name].[hash].css',
+          chunkFilename: 'build.[id].[hash].css'
         }),
-        new htmlWebpackPlugin({
+        new HtmlWebpackPlugin({
           template: 'public/templates/index.html',
-          filename: environment != 'production' ? 'index.html' : '../index.html',
+          filename: environment !== 'production' ? 'index.html' : '../index.html',
           minify: {
             collapseWhitespace: true,
             preserveLineBreaks: true
@@ -131,25 +128,23 @@ if (environment === 'production') {
       new TerserPlugin({
         terserOptions: {
           parse: {
-            ecma: 8,
+            ecma: 8
           },
           compress: {
             ecma: 5,
             warnings: false,
-            comparisons: false,
+            comparisons: false
           },
           mangle: {
-            safari10: true,
+            safari10: true
           },
           output: {
             ecma: 5,
             comments: false
-          },
+          }
         }
       })
     ];
-    babelSettings.plugins.push("transform-react-inline-elements");
-    babelSettings.plugins.push("transform-react-constant-elements");
 }
 
 

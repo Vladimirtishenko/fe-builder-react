@@ -1,163 +1,157 @@
 import React from 'react';
-import uniqid from 'uniqid';
 import {
-	string,
-	bool,
-	array,
-	oneOfType
-} from 'prop-types';
-import { ValidatorComponent } from '../../../libraries/validation/index.js';
+    oneOfType,
+    string,
+    bool,
+    object,
+    func
+   } from 'prop-types';
 
-class Input extends ValidatorComponent {
-	static propTypes = {
-		name: string.isRequired,
-		type: string,
-		required: bool,
-		label: string,
-		placeholder: string,
-
+class Input extends React.Component {
+    static propTypes = {
+        classes: string,
+        placeholder: string,
+        disabled: bool,
+        autocomplete: bool,
+        wrapClass: string,
+        input: oneOfType([object]),
+        onBlur: func,
+        onChange: func,
         value: string,
+        meta: oneOfType([object]),
+        type: string
+    }
 
-		classNameInput: string,
-		classNameLabel: string,
-        classNameWrap: string,
+    static defaultProps = {
+        placeholder: '',
+        classes: '',
+        disabled: false,
+        autocomplete: false,
+        wrapClass: '',
+        input: {},
+        value: '',
+        onBlur: () => {},
+        onChange: () => {},
+        meta: {},
+        type: 'text'
+    }
 
-		errorMessages: oneOfType([array]),
-		validators: oneOfType([array]),
-		addToValidateForm: bool
-	}
+    constructor(props) {
+        super(props);
+        const { input: { value: inputValue }, value } = props;
+        this.state = {
+            value: inputValue || value
+        };
+    }
 
-	static defaultProps = {
-		classNameInput: '',
-		classNameLabel: '',
-		classNameWrap: '',
+    componentDidUpdate(prevProps) {
+        const { input: { value: prevInputValue }, value: prevValue } = prevProps,
+              { input: { value: nextInputValue }, value: nextValue } = this.props;
 
-		type: 'text',
-
-		label: '',
-
-		required: false,
-
-		value: '',
-
-		placeholder: '',
-		autocomplete: '',
-
-		errorMessages: [],
-		validators: [],
-		validatorListener: () => {},
-
-		addToValidateForm: true
-
-	};
-
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			...props,
-			...{ id: uniqid(`${props.name}-`) }
-		};
-		this.__refs = {};
-	}
-
-	componentDidMount() {
-		this.state.addToValidateForm && this.attach(this);
-	}
-
-    componentWillUnmount() {
-		this.state.addToValidateForm && this.detach(this);
-	}
-
-	componentDidUpdate(prevProps) {
-		const comparingProps = _.isEqual(prevProps, this.props);
-
-		if (!comparingProps) {
+        if (prevInputValue !== nextInputValue) {
             this.setState(prevState => ({
-				...prevState,
-				...this.props
-			}));
-		}
-	}
+                ...prevState,
+                value: nextInputValue
+            }));
+            return false;
+        }
 
+        if (prevValue !== nextValue) {
+            this.setState(prevState => ({
+                ...prevState,
+                value: nextValue
+            }));
+        }
 
-	errorText() {
-		const { isValid } = this.state;
+        return false;
+    }
 
-		if (isValid) {
-			return null;
-		}
+    onChange = (event) => {
+        const { input: { onChange: onInputReduxChange }, onChange } = this.props,
+              { target: { value } } = event;
 
-		return (
-			<div>
-				{this.getErrorMessage && this.getErrorMessage()}
-			</div>
-		);
-	}
+          this.setState(prevState => ({
+              ...prevState,
+              value
+          }));
 
-	onChange(event) {
-		const { target: { value = '' } } = event,
-              { onChange } = this.state;
+          if (onInputReduxChange) {
+              onInputReduxChange(value);
+          }
 
-		this.makeValid();
+          if (onChange) {
+              onChange(value);
+          }
+    }
 
-		if (onChange) {
-			onChange(value);
-		}
+    onBlur = () => {
+        const { input: { onBlur: onInputReduxBlur }, onBlur } = this.props,
+              { target: { value } } = event;
 
-		this.setState({
-			value
-		});
-	}
+         if (onInputReduxBlur) {
+             onInputReduxBlur(value);
+         }
 
-	getContent() {
-		const { name } = this.props;
-		return this.__refs[`input_${name}`].value;
-	}
+         if (onBlur) {
+             onBlur(value);
+         }
+    }
 
-	setContent(value) {
-		this.setState({ value });
-	}
+    onClear = () => {
+        const { input: { onChange: onInputReduxChange }, onChange } = this.props;
 
-	render() {
-		const {
-			required,
-			classNameLabel,
-			classNameInput,
-			classNameWrap,
-			name,
-			label,
-			id,
-			type,
-			value,
-			placeholder,
-			autocomplete
-		} = this.state,
-			requiredField = required ? { required } : {},
-			holder = placeholder ? { placeholder } : {},
-			complete = autocomplete ? { autoComplete: autocomplete } : {};
+        this.setState(prevState => ({
+            ...prevState,
+            value: ''
+        }));
 
-		return (
-			<React.Fragment>
-				<div className={classNameWrap}>
-					<label htmlFor={id} className={classNameLabel}>{label}</label>
-					<input
-						id={id}
-						ref={ref => this.__refs[`input_${name}`] = ref}
-						className={classNameInput}
-						name={name}
-						type={type}
-						onChange={::this.onChange}
-						value={value}
-						{...requiredField}
-						{...holder}
-						{...complete}
-					/>
-				</div>
-				{::this.errorText()}
-			</React.Fragment>
-		);
-	}
+        if (onInputReduxChange) {
+            onInputReduxChange();
+        }
+
+        if (onChange) {
+            onChange();
+        }
+    }
+
+    render() {
+        const {
+            placeholder: place,
+            input: { name },
+            autocomplete,
+            disabled,
+            classes,
+            wrapClass,
+            meta: { touched, error, warning },
+            type
+        } = this.props,
+            holder = place ? { placeholder: place } : {},
+            complete = autocomplete ? { autoComplete: 'on' } : { autoComplete: 'off' },
+        { value } = this.state;
+
+        return (
+            <React.Fragment>
+                <div className={`relative--core ${wrapClass}`}>
+                    <div>
+                        <input
+							type={type}
+							className={classes}
+							name={name}
+							onChange={this.onChange}
+							onBlur={this.onBlur}
+							value={value}
+							disabled={disabled}
+							{...holder}
+							{...complete}
+                        />
+                    </div>
+                    {touched &&
+                        ((error && <span className="">{error}</span>) ||
+                          (warning && <span className="">{warning}</span>))}
+                </div>
+            </React.Fragment>
+        );
+    }
 }
 
 export default Input;

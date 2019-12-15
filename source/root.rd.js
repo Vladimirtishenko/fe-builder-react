@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 
 // Modules for combine reducers
+import { reducer as realTimeForm } from 'redux-form';
 import oauth from '../modules/oauth/reducers/oauth.rd.js';
 import warnings from '../libraries/warnings/reducers/index.rd.js';
 
 const root = combineReducers({
     oauth,
-    warnings
+    warnings,
+      form: realTimeForm
 }),
 initialState = root({}, {});
 
